@@ -1,0 +1,14 @@
+Web crawler using Scrapy that stores structured data into a MySQL db.
+
+
+Before running create a new database and a table and configure those parameters on:
+
+ ./farmacia_scrap/spiders/medicamentos_spider.py
+
+
+
+To run, execute:
+
+$  scrapy crawl medicamento 
+
+from the top directory.
