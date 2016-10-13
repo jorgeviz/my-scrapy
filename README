@@ -1,14 +1,14 @@
-Web crawler using Scrapy that stores structured data into a MySQL db.
+# Web crawler using Scrapy 
 
+The scraper stores structured data into a MySQL DB avoiding repited elements to be stored.
 
-Before running create a new database and a table and configure those parameters on:
+## How to run the scraper?
 
- ./farmacia_scrap/spiders/medicamentos_spider.py
-
-
-
-To run, execute:
+1. Before running create a new database called __testdb__ with password __test623__.
+2. Run from the **./farmacia_scrap/** directory
 
 $  scrapy crawl medicamento 
 
-from the top directory.
+## Documentation
+
+https://doc.scrapy.org/
