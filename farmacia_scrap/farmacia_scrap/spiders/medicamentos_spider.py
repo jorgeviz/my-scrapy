@@ -57,14 +57,27 @@ class MedicamentoSpider(scrapy.Spider):
                                             item['nombre'],
                                             item['imagen'],
                                             item['precio']))
-                        print('Just added an item to the db')
+                        print('Just ADDED an item into the DB')
                         self.conn.commit()
 
                     except mdb.Error as e:
                         print ("Error %d: %s" %(e.args[0], e.args[1]))
                 else:
-                    print('Item already added before')
-       
+                    try:
+                        #In case of repeated item, update
+                        self.cursor.execute("DELETE FROM item WHERE NOMBRE = '%s' " 
+                                                    %item['nombre'])
+                        self.cursor.execute('''INSERT INTO item (upc, nombre, imagen, precio) 
+                                            VALUES (%s, %s, %s, %s)''', 
+                                           (item['upc'],
+                                            item['nombre'],
+                                            item['imagen'],
+                                            item['precio']))
+                        print('Item is been UPDATED in the DB')
+                        self.conn.commit()
+
+                    except mdb.Error as e:
+                        print ("Error %d: %s" %(e.args[0], e.args[1]))       
 
         #Recursevely look for more links and follow links to Farmacia pages 
         next_page = response.css('div.pages a.next::attr(href)').extract_first()
